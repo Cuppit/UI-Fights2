@@ -1,0 +1,47 @@
+17:40 CDT
+SA,TX,78230
+
+OBJECTIVE: make a simple UI turn-based 1v1 battler, similar to 
+Sinjid.
+
+PRESENTATION:
+	-UI with two main components:
+		-Player stats + controls/options
+		-enemy stats + misc details
+	
+	
+GAME LOOP:
+	-Player makes character creation choices
+	-Player enters first battle
+		-player chooses an option in battle
+		-turn passes to enemy
+		-enemy performs an action
+		-turn passes to player
+		-loop repeats until one or both sides HP is zero
+	-after first battle, player is taken to management UI 
+	-after completing any changes, player is brought to next battle
+	-game cycle continues until there are no more battles and the player 
+	has won, or the player's HP reaches 0 at which point the game ends
+
+GAME MECHANICS
+
+basic principles
+	-On average, a level 1 player character should be defeatable after sustaining 3 enemy hits
+	-A level 1 player should level up after two successful battles 
+	-a suitable challenge for a level 1 player should be an enemy that is able to get at least one 
+	 hit in on the player before being defeated (e.g. can sustain 2 basic attacks from the player
+	if they go first, and 1 basic attack from the player if they go second)
+	
+Whatever stats are built should revolve around these level design rules
+
+18:56
+MAKING THE RULES
+
+It's a hard ask to make decisions
+
+22:44
+So an almost breakthrough happened, until the realization that a game hasn't 
+actually been designed.  How do gameplay mechanics work, exactly?  When
+a character attacks, what actually happens?  Is there a chance that 
+attacks miss?  How is that determined?  Is it the D20 system with AC? 
+Or is damage reduced by wearing armor?  What's the rules?

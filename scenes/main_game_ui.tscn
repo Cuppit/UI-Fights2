@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://cxoqha0u5h8h2"]
+
+[ext_resource type="Script" uid="uid://cs5r1pqiettt5" path="res://scripts/main_game_ui.gd" id="1_c6nya"]
+[ext_resource type="Script" uid="uid://t8dsksm3lrr4" path="res://scripts/game_character.gd" id="2_vhqls"]
+[ext_resource type="Script" uid="uid://cdy4knq72wdav" path="res://scripts/weapons.gd" id="3_lta42"]
+[ext_resource type="Script" uid="uid://6ni3sunkanla" path="res://scenes/armor.gd" id="4_vhqls"]
+
+[node name="MainGameUI" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_c6nya")
+
+[node name="GameCharacter" type="Node" parent="."]
+script = ExtResource("2_vhqls")
+
+[node name="Weapons" type="Node" parent="."]
+script = ExtResource("3_lta42")
+
+[node name="Armor" type="Node" parent="."]
+script = ExtResource("4_vhqls")
