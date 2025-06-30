@@ -45,3 +45,11 @@ actually been designed.  How do gameplay mechanics work, exactly?  When
 a character attacks, what actually happens?  Is there a chance that 
 attacks miss?  How is that determined?  Is it the D20 system with AC? 
 Or is damage reduced by wearing armor?  What's the rules?
+
+
+
+22:57
+--TODO FOR NEXT TIME--
+	-actually hash out a combat system to implement
+	-program the resulting system designed
+	-make UI mock-up
