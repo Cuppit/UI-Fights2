@@ -1,15 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://cxoqha0u5h8h2"]
+[gd_scene load_steps=6 format=3 uid="uid://cxoqha0u5h8h2"]
 
 [ext_resource type="Script" uid="uid://cs5r1pqiettt5" path="res://scripts/main_game_ui.gd" id="1_c6nya"]
 [ext_resource type="Script" uid="uid://t8dsksm3lrr4" path="res://scripts/game_character.gd" id="2_vhqls"]
 [ext_resource type="Script" uid="uid://cdy4knq72wdav" path="res://scripts/weapons.gd" id="3_lta42"]
-[ext_resource type="Script" uid="uid://6ni3sunkanla" path="res://scenes/armor.gd" id="4_vhqls"]
+[ext_resource type="Script" uid="uid://6ni3sunkanla" path="res://scripts/armor.gd" id="4_vhqls"]
+[ext_resource type="Texture2D" uid="uid://c0nqrd27rten4" path="res://icon.svg" id="5_lta42"]
 
 [node name="MainGameUI" type="Control"]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_c6nya")
 
 [node name="GameCharacter" type="Node" parent="."]
@@ -20,3 +23,111 @@ script = ExtResource("3_lta42")
 
 [node name="Armor" type="Node" parent="."]
 script = ExtResource("4_vhqls")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.259902, 0.130698, 0.123832, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Background"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Background/VBoxContainer"]
+layout_mode = 2
+
+[node name="PlayerUI" type="VBoxContainer" parent="Background/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Name" type="Label" parent="Background/VBoxContainer/HBoxContainer/PlayerUI"]
+layout_mode = 2
+text = "NameLabel"
+horizontal_alignment = 1
+
+[node name="CurrentHP" type="Label" parent="Background/VBoxContainer/HBoxContainer/PlayerUI"]
+layout_mode = 2
+text = "HP: 3/3"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HealthBar" type="TextureProgressBar" parent="Background/VBoxContainer/HBoxContainer/PlayerUI"]
+layout_mode = 2
+value = 70.0
+texture_under = ExtResource("5_lta42")
+texture_progress = ExtResource("5_lta42")
+tint_under = Color(1, 0, 0, 1)
+tint_over = Color(0, 0.878431, 0.870588, 1)
+tint_progress = Color(0, 0.819608, 0, 1)
+
+[node name="BtnAttack" type="Button" parent="Background/VBoxContainer/HBoxContainer/PlayerUI"]
+layout_mode = 2
+text = "Attack "
+
+[node name="BtnGuard" type="Button" parent="Background/VBoxContainer/HBoxContainer/PlayerUI"]
+layout_mode = 2
+text = "Guard"
+
+[node name="BtnItem" type="Button" parent="Background/VBoxContainer/HBoxContainer/PlayerUI"]
+layout_mode = 2
+text = "Item"
+
+[node name="BtnStats" type="Button" parent="Background/VBoxContainer/HBoxContainer/PlayerUI"]
+layout_mode = 2
+text = "Show Stats"
+
+[node name="OpponentUI" type="VBoxContainer" parent="Background/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 0
+
+[node name="Name" type="Label" parent="Background/VBoxContainer/HBoxContainer/OpponentUI"]
+layout_mode = 2
+text = "NameLabel"
+
+[node name="OpponentPortrait" type="TextureRect" parent="Background/VBoxContainer/HBoxContainer/OpponentUI"]
+layout_mode = 2
+texture = ExtResource("5_lta42")
+
+[node name="HealthBar" type="TextureProgressBar" parent="Background/VBoxContainer/HBoxContainer/OpponentUI"]
+layout_mode = 2
+value = 50.0
+texture_progress = ExtResource("5_lta42")
+tint_under = Color(1, 0, 0, 1)
+tint_over = Color(0.878241, 0.877873, 0.870812, 1)
+tint_progress = Color(0, 0, 0.984314, 1)
+
+[node name="OpponentDescription" type="Label" parent="Background/VBoxContainer/HBoxContainer/OpponentUI"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_vertical = 1
+text = "Info about the opponent, I think I understand the custom minimum size requirement now."
+autowrap_mode = 3
+
+[node name="InfoBox" type="ColorRect" parent="Background/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+color = Color(0.0316364, 0.0940824, 0.147707, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Background/VBoxContainer/InfoBox"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "This is the battle msg log"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="Background/VBoxContainer/HBoxContainer/PlayerUI/BtnAttack" to="." method="_on_btn_attack_pressed"]
+[connection signal="pressed" from="Background/VBoxContainer/HBoxContainer/PlayerUI/BtnGuard" to="." method="_on_btn_guard_pressed"]
+[connection signal="pressed" from="Background/VBoxContainer/HBoxContainer/PlayerUI/BtnItem" to="." method="_on_btn_item_pressed"]
+[connection signal="pressed" from="Background/VBoxContainer/HBoxContainer/PlayerUI/BtnStats" to="." method="_on_btn_stats_pressed"]

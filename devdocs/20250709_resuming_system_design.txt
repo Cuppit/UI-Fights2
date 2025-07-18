@@ -1,0 +1,27 @@
+08:03 CDT
+
+DETERMINING CHANCES OF HITTING OPPONENT
+
+Chance to land hit: function of each opponents dex + str (for now)
+
+just experimenting, don't need comprehensive ruleset.   Just need something
+to test actual programming mechanics, can use to test game balance later
+
+Damage: weapon damage + str + dex (stat damage scaling function/coefficient?)
+
+---PROGRAMMING TAKING ACTIONS---
+
+Flow is as follows:
+	-Character calls "execute ability", which passes the ability selection and target
+	 the abilities script
+	
+	-abilities script executes code for the result of the ability based on the characteristics
+	 of the characters involved
+	
+	IMPLEMENTATION: a global script, "abilities.gd", which has the function that processes all
+	abilities.
+
+08:44
+--- BASIC SCRIPT STRUCTURE IMPLEMENTED ---
+
+NEXT STEP: Make basic UI mockup

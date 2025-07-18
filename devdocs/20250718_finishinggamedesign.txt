@@ -1,0 +1,44 @@
+09:09 CDT
+
+Basic mechanics/flow of function established, now curious about how to
+implement factoring everything that could possibly affect the outcome 
+(e.g. equipment, status effects).
+
+To accomplish:
+	-Finish implementing how outcomes are calculated
+		-(e.g. which script is responsible for what calculations, GameCharacter or
+		  Abilities?  How are the Weapon/Armor databases accessed?  How is 
+		  inventory implemented/managed among characters?)
+
+Also: still need to implement:
+	-enemy AI
+	-Action Outcome messaging
+	-UI design (what info about enemy does player have, how to describe
+	action outcomes, visual effects?  Sound effects?)
+	-Writing?  Character design (e.g. how to hook in the player on an
+	emotional level, not just the raw "this is just some arena battler")
+
+
+-- 10:16 CDT --
+
+CONUNDRUM: The armor has been designed/programmed to ONLY be able
+to provide armor bonuses.  Is that good from a design perspective?  Likewise
+weapons were programmed to ONLY be able to provide weapon bonuses.  What if 
+someone wants to design a weapon that also provides an armor bonus?  Or
+vice versa?
+
+But that's small compared to other problems.  I need to be able to log
+messages
+
+-- 11:05 CDT --
+
+A rich text label will suffice for game messages
+for now
+
+PROBLEM: HOW TO IMPLEMENT THE BATTLE LOG?
+	-What needs access to the battle log?
+		-MainGameUI: Update the UI control that displays messages
+		-Ability script: log event details as an ability resolves
+		
+TODO: figure out where the battle log lives so it can be accessed
+appropriately by the other pieces of the game

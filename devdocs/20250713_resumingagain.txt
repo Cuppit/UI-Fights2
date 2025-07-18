@@ -1,0 +1,107 @@
+13:49 CDT
+
+Going to review last time's notes and go from there
+
+...
+
+Resuming UI mock-ups
+
+The UI needs to portray relevant stats about the player,
+as well as relevant stats of the opponent.
+
+CONUNDRUM
+
+Do you write the fully-fleshed out script before the UI, or do you fully
+design the UI before writing the script?
+
+ANSWER: You write the script after fully fleshing out the UI.
+
+WHEN IS THE UI FULLY FLESHED OUT?
+
+Ans: when the idea for the game is fully fleshed out.
+
+THE GAME IS NOT YET FULLY FLESHED OUT
+
+Solution:  Fully flesh out the entire game loop
+
+--- THE ENTIRE GAME LOOP OVERVIEW ---
+Player begins a fight
+	-Things the player can see in the UI:
+		-Character name
+		-current HP
+		-"VIEW CHARACTER SHEET" option
+		-Option Buttons (e.g. attack, defend, item)
+		
+		-Enemy Name
+		-Enemy Portrait
+		-Enemy description (e.g. "bloodied")
+		
+	
+--- 14:40 ---
+
+A basic UI is mocked up, complete with node names for all the controls the script would have to 
+interact with.  Next is to code the buttons, actions, and order of turn process.
+
+PROCESSING TURNS
+Once the player chooses an option, that option is processed, then the enemy turn
+is processed using whatever logic necessary to process the turn (usually just
+attack though, pending any fancy AI design).
+
+--- 17:23 ---
+
+Took a break for a couple hours, started coding UI buttons.  Ran into issue again of,
+actual game design hasn't taken place.  So no established rules for basic concepts
+(e.g. what do the stats actually mean, what's actually going on when an attack
+ occurs, how do stats factor into it, etc)
+
+--- IMPROMPTU GAME DESIGN ---
+THE ANATOMY OF AN ATTACK
+
+When a character attacks another character, first it must be determined whether the hit 
+connected.
+
+Method of determining player "to hit" stat:
+	2*dexterity + strength + any accuracy modifiers from:
+		-status effects
+		-equipment
+		
+	
+method of determining player "to avoid" stat:
+	dexterity + any "to avoid" modifiers from:
+		-status effects
+		-equipment
+		
+method of determining player "damage" stat:
+	2*strength + dexterity + any damage modifiers from:
+		-stat effects
+		-equipment
+
+method of determining player "damage reduction" stat:
+	constitution/2 + strength/4 + modifiers
+
+	EXAMPLE: attacker stats:
+		
+		str: 2
+		dex: 3
+		con: 2
+		accuracy bonuses: 3
+		damage bonuses: 1
+		total "to hit" stat: 2+6+3 = 11
+		total damage stat: 4+3+1 = 8
+		total "dodge" stat: 3
+		total "dmg reduction" stat:1
+		
+		defender stats:
+		str:1
+		dex: 4
+		con: 3
+		dodge bonuses: 0
+		total "to hit" stat: 8+1 = 9
+		total "dmg" stat: 2+4 = 6
+		total "dodge" stat: 4+2 = 4
+		total "dmg reduction" stat: 1
+		
+		sum of to hit and to avoid: 11 + 4 = 15
+		
+		chances to hit vs total chances: 11/15 = 73% chance to hit
+		

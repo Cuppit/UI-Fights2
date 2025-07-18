@@ -1,0 +1,11 @@
+20:29 CDT
+
+ATTACK CONNECTED, WHAT NOW?
+
+Calculate damage dealt
+
+simple formula : 
+	
+net damage = attacker_dmg - dmg_reduction 
+
+Will design more intricate formulas as needs dictate
