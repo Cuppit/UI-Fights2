@@ -26,7 +26,9 @@ func get_str():
 
 func get_dex():
 	
-	print("DEBUG: type of Global.weaponDB.get(equipped_weapon,'None') is: ",Global.weaponDB.get(equipped_weapon,"None"))
+	print("DEBUG: Global.weaponDB.get(",equipped_weapon,"'None') yields: ",\
+		Global.weaponDB.get(equipped_weapon,"None"),"Weapon name is:",\
+		Global.weaponDB.get(equipped_weapon,"None").weapon_name)
 	var total = base_dex \
 		+ Global.weaponDB.get(equipped_weapon,"None").stat_bonuses.get("dex") \
 		+ Global.armorDB.get(equipped_armor,"None").stat_bonuses.get("dex")
@@ -57,7 +59,7 @@ func get_armor():
 ## More to be defined later, but the most basic factor: constitution * 3.
 ## (And also max health can never go below 1)
 func get_max_health():
-	var total = (get_con()*3)
+	var total = (get_con()*9)
 	return total if total > 1 else 1 
 
 ## Debug function to test how script hierarchy/scoping works in Godot	
@@ -67,7 +69,11 @@ func print_health():
 func process_turn(ability_name="", target=null):
 	Abilities.execute_ability(self, ability_name, target)
 
-func _init(stren=1, dex=1, con=1):
+func _init(chname="Anon",stren=1, dex=1, con=1):
+	character_name=chname
 	base_str = stren
 	base_dex = dex
 	base_con = con
+	
+	## Initialize starting stats that are changable (e.g. HP)
+	curr_health = get_max_health()

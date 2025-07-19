@@ -1,0 +1,74 @@
+-- 10:37 CDT --
+
+The battle log isn't automatically scrolling to the bottom in the UI.  Going
+to try and fix that.  Then:
+	-Implement comprehensive UI update function for entire UI
+	-Implement turns/enemy AI
+	-begin planning/design "in-between" fights menu (manage loadout, etc.)
+
+-- 10:39 CDT --
+
+So "automatically scrolling" was as simple as checking the "Scroll following" 
+feature in the Inspector tab for the RichTextLabel.  Cool, next subject: 
+	
+-- 10:50 CDT --
+
+The latest problem: I want to keep my UI updated with information that's 
+constantly changing, and it occurred to me I have no idea how to do that
+"correctly" in Godot.  It turns out signals is the way to go, if basic 
+search engine answers from Reddit, Godot forums etc. are to be believed.
+
+-- 11:14 CDT --
+
+Having problems implementing signals, will simply call update_UI on every
+player interaction for now, come back to signals at a later time
+
+
+-- 11:40 CDT --
+
+At some point I put a text box beneath the opponent's portrait.  The intent
+was to display info regarding how the opponent is reacting.  
+
+--NEW SYSTEM IDEA: CHARACTER STATE-BASED EXPRESSIONS--
+	A character object will have a dictionary of possible messages to portray
+	based on what's intended to be presented to the player, as a kind of 
+	hint.  Examples include how the opponent is behaving, what the opponent might be 
+	feeling, what the opponents intentions are, how close they are to being 
+	defeated, and so on. 
+	
+-- IMPLEMENTATION --
+	For each opponent, a set of messages will be written that expresses a
+	certain state.
+	Q: WHAT ARE THE STATES?
+	A: 	-Neutral
+			-The opponent betrays nothing
+			-ex1: "The creature stands ready"
+			-ex2: "The warrior shouts 'lets do this!' "
+		-Aggressive
+			-The opponent appears ready to strike hard
+		- 	-ex1: "The opponents glare becomes intense!"
+			-ex2: "The opponent's posture suddenly seems aggressive!"
+		-Defensive
+			-The opponent's about to act defensively
+			-ex1: "The opponent is standing their ground."
+			-ex2: "The opponent shouts 'take your best shot!'"
+		-Weak 1/3rd hp
+			-opponent's at 1/3rd or less HP
+			-ex1: "The opponent is gasping heavily for air."
+			-ex2: "the opponent doesn't look like he'll last much longer."
+			-ex3: ""
+			... -12:00- break for lunch
+			
+-- 12:29 CDT --
+	
+		IMPLEMENTATION OF PROPOSED IDEA
+			-enum as character state
+			
+			-dictionary to hold data
+				key: character state
+				value: array/list of possible messages (shoot for at least 4 unique messages?)
+			
+		THIS IS A LOT OF DATA, WHERE SHOULD IT BE STORED?
+		
+		Ideally a database will hold all character data.  New characters can be added to the data.
+		but for now we'll hand-jam the character messages in a .gd script 

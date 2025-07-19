@@ -1,32 +1,66 @@
 extends Control
 
 var player: GameCharacter
-
 var opponent: GameCharacter
 
+func update_battle_log(msg=""):
+	if msg != "": 
+		Global.update_battle_log(msg)
+	## clear log before re-filling
+	$Background/VBoxContainer/InfoBox/BattleLog.text = ""
+	for x in Global.battle_log:
+		$Background/VBoxContainer/InfoBox/BattleLog.text += (x+'\n')
 
-## An array of strings, which is the list of messages reported to the 
-## battle manager explaining what's happening
-var battle_log = [] 
+## Check and update all features of the UI
+func update_ui():
+	## --- UPDATING PLAYER INFORMATION ---
+	# Update player's name
+	$Background/VBoxContainer/HBoxContainer/PlayerUI/Name.text = player.character_name
+	
+	# Update player's current HP
+	$Background/VBoxContainer/HBoxContainer/PlayerUI/CurrentHP.text = str("HP: ",player.curr_health,"/",player.get_max_health())
+	
+	# Update player's health bar
+	$Background/VBoxContainer/HBoxContainer/PlayerUI/HealthBar.max_value = player.get_max_health()
+	$Background/VBoxContainer/HBoxContainer/PlayerUI/HealthBar.value = player.curr_health
+	
+	## --- UPDATING OPPONENT INFORMATION ---
+	# Update opponent's name
+	$Background/VBoxContainer/HBoxContainer/OpponentUI/Name.text = opponent.character_name
+	
+	# Update opponent's current HP TODO 20250719: decide whether to display opponent HP and/or what conditions to do so under
+	#$Background/VBoxContainer/HBoxContainer/OpponentUI/CurrentHP.text = str("HP: ",opponent.curr_health,"/",opponent.get_max_health())
+	# Update opponent's health bar
+	# $Background/VBoxContainer/HBoxContainer/OpponentUI/HealthBar.max_value = opponent.get_max_health()
+	# $Background/VBoxContainer/HBoxContainer/OpponentUI/HealthBar.value = opponent.curr_health
+	
 
 func _ready():
+	# Connect signals
+	# Global.connect("battle_log_updated", self, "_on_battle_log_updated")
+	
 	#generate the game resources as defined in scripts
+	print("Building game databases:")
 	Global.build_weapon_db()
 	Global.build_armor_db()
 	
-	player = GameCharacter.new()
+	print("building characters:")
+	player = GameCharacter.new("Devon",3,3,3)
+	player.equipped_weapon = "Dagger"
 	player.print_health()
 	
 	opponent = GameCharacter.new()
-
+	
+	# make an initial update to the UI
+	update_ui()
 
 func _on_btn_attack_pressed():
-	battle_log.append(str(player.character_name,"attacks!"))
+	
+	update_battle_log(str("--\n",player.character_name," attacks ",opponent.character_name,"!"))
 	player.process_turn("attack", opponent)
+	update_battle_log()
 	#opponent.process_turn()
 	pass # Replace with function body.
-
-
 
 func _on_btn_guard_pressed():
 	pass # Replace with function body.
@@ -38,3 +72,9 @@ func _on_btn_item_pressed():
 
 func _on_btn_stats_pressed():
 	pass # Replace with function body.
+
+func _on_battle_log_updated():
+		## clear log before re-filling
+	$Background/VBoxContainer/InfoBox/BattleLog.text = ""
+	for x in Global.battle_log:
+		$Background/VBoxContainer/InfoBox/BattleLog.text += (x+'\n')

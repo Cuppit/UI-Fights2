@@ -42,3 +42,16 @@ PROBLEM: HOW TO IMPLEMENT THE BATTLE LOG?
 		
 TODO: figure out where the battle log lives so it can be accessed
 appropriately by the other pieces of the game
+
+
+--break, 11:30ish CDT--
+
+--18:15 CDT--
+
+So the current problem is figuring out "where does the battle log live?"
+I guess it lives in Global, since multiple scripts need access to it at
+any given time.  But now I worry Global is getting bloated.  We will see
+what happens.
+
+DECISION: BATTLE LOG LIVES IN GLOBAL
+BATTLE LOG IS ACCESSED BY THE MAIN GAME UI AND UPDATED REGULARLY

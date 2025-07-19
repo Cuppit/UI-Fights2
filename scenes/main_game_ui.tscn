@@ -117,14 +117,14 @@ layout_mode = 2
 size_flags_vertical = 3
 color = Color(0.0316364, 0.0940824, 0.147707, 1)
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Background/VBoxContainer/InfoBox"]
+[node name="BattleLog" type="RichTextLabel" parent="Background/VBoxContainer/InfoBox"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "This is the battle msg log"
+scroll_following = true
 horizontal_alignment = 1
 
 [connection signal="pressed" from="Background/VBoxContainer/HBoxContainer/PlayerUI/BtnAttack" to="." method="_on_btn_attack_pressed"]
