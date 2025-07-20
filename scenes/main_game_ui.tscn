@@ -74,6 +74,7 @@ text = "Attack "
 
 [node name="BtnGuard" type="Button" parent="Background/VBoxContainer/HBoxContainer/PlayerUI"]
 layout_mode = 2
+disabled = true
 text = "Guard"
 
 [node name="BtnItem" type="Button" parent="Background/VBoxContainer/HBoxContainer/PlayerUI"]
@@ -92,6 +93,7 @@ size_flags_vertical = 0
 [node name="Name" type="Label" parent="Background/VBoxContainer/HBoxContainer/OpponentUI"]
 layout_mode = 2
 text = "NameLabel"
+horizontal_alignment = 1
 
 [node name="OpponentPortrait" type="TextureRect" parent="Background/VBoxContainer/HBoxContainer/OpponentUI"]
 layout_mode = 2
@@ -110,6 +112,7 @@ custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 size_flags_vertical = 1
 text = "Info about the opponent, I think I understand the custom minimum size requirement now."
+horizontal_alignment = 1
 autowrap_mode = 3
 
 [node name="InfoBox" type="ColorRect" parent="Background/VBoxContainer"]

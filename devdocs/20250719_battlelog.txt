@@ -72,3 +72,66 @@ was to display info regarding how the opponent is reacting.
 		
 		Ideally a database will hold all character data.  New characters can be added to the data.
 		but for now we'll hand-jam the character messages in a .gd script 
+		...
+		
+-- 13:18 CDT --
+When attempting to make a globally accessible database of character objects, something breaks.
+In the "global.gd" script (the first autoloaded script) there's three dictionaries declared.  Two 
+have been there since the beginning: weaponDB and armorDB.  These dictionaries are filled with
+a key-value pair of a string-object (name-weaponobject for weapons, and name-armorobject for
+armor).  This has never caused problems with the program as a whole.
+
+The third dictionary created, characterDB, is a key-value pair of string-object as well.  However
+the game breaks when initializing it.  part of the functionality of a GameCharacter object is 
+to query the Global script's weapon database.  However, when doing so, it comes back as "null" at
+this point of the code.  So, the weaponDB doesn't exist at the point the characterDB is being 
+created.  That means the characterDB needs to be initialized/created at some point *after* 
+creation of the other databases it relies on.
+
+...
+
+So that issue was fixed, that's going in a LESSON'S LEARNED after this project. 
+
+WHY DID I GO DOWN THE DATABASE RABBIT HOLE?
+
+I realized I needed a character database separate from the main script to manage the large amount
+of content for the "character expressions" idea.  
+
+-- 13:56 CDT --
+NEW PROBLEM ENCOUNTERED
+
+I went ahead and tried to implement a "CharacterDB".  This is a dictionary of GameCharacter
+instances generated from the 'character_db.gd' script.  The problem with this: there is no
+built-in "deepcopy" method in Godot.  If I want to pull from this database to make a 
+new character (say, to fill the 'opponent' slot with a random character from the database)
+I need to manually write one.  Which shouldn't be hard at this point, there are only a handful
+of unique parameters for a character at this point.  But it will be hard to expand down the line
+if I decide to change/add features.  In the mean time, can see how this will go down.
+
+NEW QUESTION: WHERE TO PUT CLONE CHARACTER FUNCTION?
+
+Potential spots that make sense:
+	-global.gd
+	-game_character.gd
+	-character_db.gd
+	
+	For now, we'll put func clone_character() in global.gd.
+
+-- 14:11 --
+
+It's implemented and it works!  I also realized I forgot to incorporate accuracy bonus stats into weapons,
+and evasion stat bonuses into armor.  So I did that.
+
+Now there needs to be an implementation of the messages described above.  What should the character state
+be called?  Mood?  Disposition?  Posture?  Attitude?  Let's try Attitude.
+
+...
+
+well it will take too long to implement the creativity needed. ...well, let's try it anyway
+
+-- 14:39 --
+
+Basic implementation done, with 1 enemy in the character database filled with messages.  
+
+Finally, it's time to implement the opponent fighting back.  But it's time to take a break before
+embarking on that quest.

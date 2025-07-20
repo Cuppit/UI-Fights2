@@ -4,7 +4,7 @@ var rng = RandomNumberGenerator.new()
 
 var weaponDB = {"None":Weapon.new()}
 var armorDB = {"None":Armor.new()}
-#var characterDB ={"Placeholder":GameCharacter.new()}
+var characterDB ={}
 
 ## Gain access to scripts designed to build databases for game use
 ## Potentially over-engineering, however want raw data to be somewhat separate from main logic
@@ -36,4 +36,9 @@ func build_armor_db():
 
 
 func build_character_db():
-	Global.characterDB["None"]=GameCharacter.new()
+	var cdbs = CharacterDBScript.new()
+	cdbs.build_character_db()
+	#
+func clone_character(char=characterDB["None"]):
+	return GameCharacter.new(char.character_name,char.base_str,char.base_dex,char.base_con,char.equipped_weapon,char.equipped_armor,char.attitude_msgs)
+	

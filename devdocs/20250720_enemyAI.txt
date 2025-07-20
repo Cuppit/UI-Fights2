@@ -1,0 +1,104 @@
+-- 11:25 CDT --
+
+	  ==PAX== 
+	   B   V    
+	V    C    R    
+  I    C S S    S
+L    N D S M D    N
+  Q    P M B    S
+	 M   L   M
+	   S   V
+
+		==PAX==        
+		 B   V         
+	  V    C    R      
+	I    C S S    S    
+  L    N D S M D    N  
+	Q    P M B    S    
+	   M   L   M       
+		 S   V          
+		
+
+-- 11:37 CDT --
+
+So the basic battle loop needs to be established.  Let's do that here:
+	-Main Game UI tracks which character's turn it is
+	
+	-Character executes an action
+		-attack
+		-defend
+		-use a special ability
+		-use item (not yet implemented)
+		
+		 Needs to be implemented in such a way that, no matter what the player chooses,
+		always (under normal circumstances) passes turn to the opponent.  That is, coded
+		in such a way that "pass turn" doesn't have to be explicitly programmed into every
+		single possible action.  How to do so?  Wrap all actions into a main "act" function
+		which has "pass turn" as it's final action.  So...taking a break--
+		
+-- 12:12 CDT --
+
+NPC AI IMPLEMENTATION
+
+	-percent chance associated with each possible action (based on current attitude)
+	-action chosen randomly
+		-If attitude is associated with a specific action, attitude is adjusted appropriately
+		-action executes
+	-post-action attitude is selected based on some kind of criteria
+	
+	QUESTION: does a character process it's own turn?  or does the main game UI process the turn?
+	ANSWER: the character processes it's own turn
+		-IF "process turn" is called without specifying an action or target, then the proces turn
+		method itself chooses what action the character takes based on the criteria discussed
+		above.
+		
+		IMPLEMENTATION DECISION: if Character.process_turn(abi="", tgt=target) is called with no ability
+		specified (e.g. the empty string, ""), that turn will be processed automatically as if by AI
+		control.
+	
+
+1) implement passing turn from player to opponent (implemented?)
+
+ALSO: need to implement "guard" ability for the sake of having options aside from attack to choose from
+
+GUARDING IMPLEMENTATION
+	-A flag in GameCharacter indicates whether a character is currently guarding
+	-if YES, net defense/evasion is boosted by 1/3 (33%)
+		(NOTE: From a gameplay perspective, this is almost useless.  Damage needs to be reduced to 
+		 a degree that it would actually be a worthwhile choice.  Hence, something significant,
+		 such as reducing damage by half, would be good.)
+
+SO: implement passing turn to opponent now.
+IMPLEMENTATION
+	-The "pass_turn()" function, if called during the player's turn:
+		-flips the flag to "it's currently the opponent's turn"
+		-calls the "process turn" function with no ability, and opponent as the
+		 target
+		-finishes resolving whatever ability it chooses based on the criteria
+		 that will be designed and implemented
+		-calls "pass_turn()" again, which sees that it's the opponents turn, and
+		 thus flips the current turn to being the player's turn
+	
+So that is currently implemented.  now we implement enemy AI.
+HOW DOES IT WORK?
+
+
+Each character has a dictionary of "action preferences":
+	Key : Attitude
+	Value: another dictionary:
+		Key: action name (string)
+		Value: action weight (int)
+		
+WHAT HAPPENS WITH THESE ATTITUDES?
+	-Action is chosen based on current attitude
+	-action executes
+	-attitude is adjusted like so:
+		-If special conditions are met, change to appropriate personality
+		-else if HP is below fainting threshold, change to "fainting" personality
+		-else, randomly select attitude based on character's personality
+
+-- 14:27 --
+
+AGAINST ALL ODDS, IT WORKS.  A RUDIMENTARY AI WORKS.  I'm pretty excited about
+this, it's the first time I've managed to pull off a decision-making
+system with any kind of substance to it.

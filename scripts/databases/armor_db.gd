@@ -1,5 +1,7 @@
 extends Node
+var db = Global.armorDB
 
 func build_armor_db():
-	Global.armorDB["None"]=Armor.new()
-	Global.armorDB["Gambeson"]=Armor.new("Gambeson", 1, Armor.ArmorType.LIGHT, "Minimal protection for your person.")
+	db["None"]=Armor.new()
+	db["Gambeson"]=Armor.new("Gambeson",0, 3, Armor.ArmorType.LIGHT, "Minimal protection for your person.")
+	db["Jerkin"]=Armor.new("Jerkin",0, 1, Armor.ArmorType.LIGHT, "A worn jerkin.")
