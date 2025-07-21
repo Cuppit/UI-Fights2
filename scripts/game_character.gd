@@ -14,7 +14,8 @@ enum Attitude {
 	NEUTRAL,  ## When an enemy is exhibiting their normal behavior
 	AGGRESSIVE, ## When an enemy is taking up an aggressive posture, attempting to use a strong attack
 	DEFENSIVE, ## When an enemy is taking up a defensive posture
-	FAINTING ## When below a certain HP threshold, usually, 1/3rd, an enemy has to be at to exhibit close to being defeated
+	FAINTING, ## When below a certain HP threshold, usually, 1/3rd, an enemy has to be at to exhibit close to being defeated
+	DEFEATED ## Used to indicate 
 }
 
 ## The current attitude of this character (neutral by default)
@@ -26,7 +27,8 @@ var personality = {Attitude.NEUTRAL:4,Attitude.AGGRESSIVE:1,Attitude.DEFENSIVE:1
 var attitude_msgs = {Attitude.NEUTRAL:["neutralmsg1","neutralmsg2"]\
 					 ,Attitude.AGGRESSIVE:["aggressivemsg1","aggressivemsg2"]\
 					 ,Attitude.DEFENSIVE:["defensivemsg1","defensivemsg2"]\
-					 ,Attitude.FAINTING:["faintingmsg1","faintingmsg2"]}
+					 ,Attitude.FAINTING:["faintingmsg1","faintingmsg2"]\
+					 ,Attitude.DEFEATED:["deadmsg1","deadmsg2"]}
 
 var action_preferences = { Attitude.NEUTRAL:{"attack":5,"guard":1}\
 							,Attitude.AGGRESSIVE:{"attack":1,"guard":0}\
@@ -143,13 +145,21 @@ func process_turn(ability_name="", target=null):
 		# 3) Execute the chosen ability
 		Abilities.execute_ability(self, selection, target)
 		
-		# 4) Choose a new attitude
+		# 4) Choose a new attitude (and adjust attitude of defeated opponent, if applicable)
+		if target != null:
+			if target.curr_health <= 0:
+				target.current_attitude = Attitude.DEFEATED
+		if curr_health <= 0:
+			current_attitude = Attitude.DEFEATED
 		if curr_health < int(get_max_health()*fainting_threshold):
 			current_attitude = Attitude.FAINTING
 		else:
 			current_attitude = choose_weighted_outcome(personality)
 	else:
 		Abilities.execute_ability(self, ability_name, target)
+		if target != null:
+			if target.curr_health <= 0:
+				target.current_attitude = Attitude.DEFEATED
 
 func _init(chname="Anon",stren=1, dex=1, con=1, weapon="None", armor="None", attitudemsgs=null):
 	character_name=chname

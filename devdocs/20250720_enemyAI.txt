@@ -102,3 +102,45 @@ WHAT HAPPENS WITH THESE ATTITUDES?
 AGAINST ALL ODDS, IT WORKS.  A RUDIMENTARY AI WORKS.  I'm pretty excited about
 this, it's the first time I've managed to pull off a decision-making
 system with any kind of substance to it.
+
+---16:02 --
+
+Back at it; so now conditions for the battle actually ending need to be implemented.
+END BATTLE CONDITION:
+	One or both characters have HP of 0 at the end of a turn
+	
+WHERE DOES THE CHECK_FOR_END_OF_BATTLE FUNCTION HAPPEN?
+	-MainGameUI
+		-
+		...
+		
+---18:42---
+was distracted, but spent last 5 minutes doing an easy fix in the "pass_turn()" function
+for the main game UI, now the game just kind of ends once one opponent is dead.
+
+WHERE TO GO FROM HERE?
+	Couple options:
+		-Design progression loop
+		-Design Stats screen
+		-Design starting method
+		-Decouple classes into globally defined concepts so they aren't taking up room
+		 in the MainGameUI
+		-refactor code into a bigger projects
+
+
+-- 21:28 --
+
+Well this has been fun but it's time to call it a night.  Last things done:
+	-Stitched Godot-game-template fragments into the project to try and expand
+	 it out a little more
+	
+	-threw in a couple music players into the nodes:
+		-Heros' Prayer Land Theme Loop by pyroguy-37:
+			https://www.newgrounds.com/audio/listen/59993
+		
+		-Some other track I threw together using LMMS and the Fatboy soundfont
+		 (I call it 'buildup'):
+			https://lmms.io
+			https://fatboy.site
+			
+													--=== TO BE CONTINUED >

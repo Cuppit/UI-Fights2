@@ -5,11 +5,13 @@ var rng = Global.rng
 
 ## Performs the ability against the target character
 func execute_ability(user:GameCharacter, ability_name:String="", tgt:GameCharacter=null):
+	Global.battle_log.append(str("--\n"))
 	match ability_name:
 		"attack":
 			if tgt==null:
 				print("  error in function 'Abilities.execute_ability(",user,ability_name,tgt,")' -- no target for the attack")
 			else:
+				Global.battle_log.append(str(user.character_name," attacks!"))
 				var roll_range = user.get_accuracy() + tgt.get_evasion()
 				var attack_roll = rng.randi_range(1, roll_range)
 				if attack_roll > user.get_accuracy():
@@ -25,7 +27,7 @@ func execute_ability(user:GameCharacter, ability_name:String="", tgt:GameCharact
 					tgt.curr_health -= net_dmg if net_dmg > 0 else 0
 		"guard":
 			print("BEFORE guarding, character ",user.character_name," has ",user.get_evasion()," evasion, and ",user.get_armor()," armor.")
-			print("Character ",user.character_name," is guarding!")
+			Global.battle_log.append(str(user.character_name," is guarding!"))
 			user.guarding=true
 			print("AFTER guarding, character ",user.character_name," has ",user.get_evasion()," evasion, and ",user.get_armor()," armor.")
 		_:

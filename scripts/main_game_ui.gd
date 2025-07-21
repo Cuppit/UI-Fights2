@@ -14,6 +14,25 @@ var current_turn = Turn.PLAYER
 
 ## Utility function to pass turn
 func pass_turn():
+	
+	# First, check  for end of battle
+	if player.curr_health <=0 and opponent.curr_health <=0:
+		update_battle_log(str(player.character_name," and ",opponent.character_name,"have both fallen!"))
+		current_turn = Turn.OPPONENT
+		update_ui()
+		return
+	elif player.curr_health <=0:
+		update_battle_log(str(player.character_name," has fallen!"))
+		current_turn = Turn.OPPONENT
+		update_ui()
+		return
+	elif opponent.curr_health <=0: 
+		update_battle_log(str(player.character_name," has defeated ",opponent.character_name," in battle!"))
+		current_turn = Turn.OPPONENT
+		update_ui()
+		return
+	
+	
 	if current_turn == Turn.PLAYER: 
 		current_turn = Turn.OPPONENT
 		opponent.process_turn("",player)
@@ -45,10 +64,10 @@ func update_ui():
 	$Background/VBoxContainer/HBoxContainer/PlayerUI/HealthBar.value = player.curr_health
 	
 	# Update whether the player's buttons are clickable
-	$Background/VBoxContainer/HBoxContainer/PlayerUI/BtnAttack.disabled=false if current_turn == Turn.PLAYER else true
-	$Background/VBoxContainer/HBoxContainer/PlayerUI/BtnGuard.disabled=false if current_turn == Turn.PLAYER else true
-	$Background/VBoxContainer/HBoxContainer/PlayerUI/BtnItem.disabled=false if current_turn == Turn.PLAYER else true
-	$Background/VBoxContainer/HBoxContainer/PlayerUI/BtnStats.disabled=false if current_turn == Turn.PLAYER else true
+	$Background/VBoxContainer/HBoxContainer/PlayerUI/BtnAttack.disabled=false if current_turn==Turn.PLAYER else true
+	$Background/VBoxContainer/HBoxContainer/PlayerUI/BtnGuard.disabled=false if current_turn==Turn.PLAYER else true
+	$Background/VBoxContainer/HBoxContainer/PlayerUI/BtnItem.disabled=false if current_turn==Turn.PLAYER else true
+	$Background/VBoxContainer/HBoxContainer/PlayerUI/BtnStats.disabled=false if current_turn==Turn.PLAYER else true
 	
 	## --- UPDATING OPPONENT INFORMATION ---
 	# Update opponent's name
@@ -60,6 +79,7 @@ func update_ui():
 	$Background/VBoxContainer/HBoxContainer/OpponentUI/HealthBar.max_value = opponent.get_max_health()
 	$Background/VBoxContainer/HBoxContainer/OpponentUI/HealthBar.value = opponent.curr_health
 	
+	print(opponent.get_battle_msg()," ...current attitude:",opponent.current_attitude)
 	$Background/VBoxContainer/HBoxContainer/OpponentUI/OpponentDescription.text = opponent.get_battle_msg()
 	update_battle_log()
 	
@@ -85,7 +105,6 @@ func _ready():
 	update_ui()
 
 func _on_btn_attack_pressed():
-	update_battle_log(str("--\n",player.character_name," attacks ",opponent.character_name,"!"))
 	player.process_turn("attack", opponent)
 	update_battle_log()
 	pass_turn()

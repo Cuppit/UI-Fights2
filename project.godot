@@ -11,12 +11,17 @@ config_version=5
 [application]
 
 config/name="UI Fights2"
-run/main_scene="res://scenes/main_game_ui.tscn"
+run/main_scene="uid://c2gocuhw2o7py"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
 
+DebugShortcuts="*res://addons/ggt-debug-shortcuts/autoload/debug_shortcuts.tscn"
+Game="*res://addons/ggt-core/game.gd"
+Transitions="*res://addons/ggt-core/transitions/transitions.tscn"
+Scenes="*res://addons/ggt-core/scenes/scenes.gd"
+Utils="*res://addons/ggt-core/utils/utils.gd"
 Global="*res://scripts/global/global.gd"
 Abilities="*res://scripts/global/abilities.gd"
 
