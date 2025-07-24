@@ -31,6 +31,7 @@ enum DamageType{
 	BLUDGEONING
 }
 
+#var stat_bonuses={"str":0,"dex":0,"con":0}
 var stat_bonuses={"str":0,"dex":0,"con":0}
 var weapon_name = "WeaponName"
 var weapon_description = "Weapon description"

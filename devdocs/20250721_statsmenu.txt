@@ -1,0 +1,12 @@
+-- 16:13 --
+
+Since the player wants to have an idea of how good a character is,
+they need options.  Let's have a character select menu.
+
+
+CHARACTER SELECT MENU
+
+Components:
+	-Character portraits that can be clicked on
+	-clicking on the portrait "highlights" the portrait and displays their 
+	 stats, while explaining what it is that makes them strong.  

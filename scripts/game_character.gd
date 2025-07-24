@@ -49,6 +49,7 @@ var guarding = false
 var base_str = 1
 var base_dex = 1
 var base_con = 1
+var base_int = 1
 
 var level = 1
 
@@ -60,8 +61,8 @@ var equipped_armor = "None"
 ## lower than 1 at any time)
 func get_str():
 	var total = base_str \
-		+ Global.weaponDB.get(equipped_weapon,Global.weaponDB["None"]).stat_bonuses.get("str") \
-		+ Global.armorDB.get(equipped_armor,Global.armorDB["None"]).stat_bonuses.get("str")
+		+ Global.weaponDB.get(equipped_weapon,Global.weaponDB["None"]).stat_bonuses.get("str",0) \
+		+ Global.armorDB.get(equipped_armor,Global.armorDB["None"]).stat_bonuses.get("str",0)
 	return total if total > 1 else 1
 
 func get_dex():
@@ -70,16 +71,22 @@ func get_dex():
 		Global.weaponDB.get(equipped_weapon,Global.weaponDB["None"]),"Weapon name is:",\
 		Global.weaponDB.get(equipped_weapon,Global.weaponDB["None"]).weapon_name)
 	var total = base_dex \
-		+ Global.weaponDB.get(equipped_weapon,Global.weaponDB["None"]).stat_bonuses.get("dex") \
-		+ Global.armorDB.get(equipped_armor,Global.armorDB["None"]).stat_bonuses.get("dex")
+		+ Global.weaponDB.get(equipped_weapon,Global.weaponDB["None"]).stat_bonuses.get("dex",0) \
+		+ Global.armorDB.get(equipped_armor,Global.armorDB["None"]).stat_bonuses.get("dex",0)
 	return total if total > 1 else 1
 
 func get_con():
 	var total = base_con \
-		+ Global.weaponDB.get(equipped_weapon,Global.weaponDB["None"]).stat_bonuses.get("con") \
-		+ Global.armorDB.get(equipped_armor,Global.armorDB["None"]).stat_bonuses.get("con")
+		+ Global.weaponDB.get(equipped_weapon,Global.weaponDB["None"]).stat_bonuses.get("con",0) \
+		+ Global.armorDB.get(equipped_armor,Global.armorDB["None"]).stat_bonuses.get("con",0)
 		
 	return total if total > 1 else 1
+
+func get_int():
+	var total = base_int \
+		+ Global.weaponDB.get(equipped_weapon,Global.weaponDB["None"]).stat_bonuses.get("int",0) \
+		+ Global.armorDB.get(equipped_armor,Global.armorDB["None"]).stat_bonuses.get("con",0)
+		
 
 # Accuracy stat of a game character
 func get_accuracy():
@@ -104,7 +111,7 @@ func get_armor():
 ## More to be defined later, but the most basic factor: constitution * 3.
 ## (And also max health can never go below 1)
 func get_max_health():
-	var total = (get_con()*27)
+	var total = (get_con()*54)
 	return total if total > 1 else 1 
 
 ## Debug function to test how script hierarchy/scoping works in Godot	

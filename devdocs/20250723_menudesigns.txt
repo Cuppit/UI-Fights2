@@ -1,0 +1,33 @@
+-- 12:54 CDT --
+
+Character select screen is in development, after that will consider stats
+menu, then figure out how much farther to take this project before wrapping it 
+up, getting lessons learned, etc.
+
+...
+
+-- 20:15 CDT --
+modulate properties of character portrait buttons: (1.00, 1.00, 1.00, 0.40)
+
+...
+
+Still need to figure out what content to put the character select.  Needs to be
+a general description, a more specific description of pros and cons, and
+explanation of their unique abilities/features
+
+In the mean time, tweaked GameCharacter to include an "int" (intelligence) stat
+to accommodate sage archetype whose abilities will rely more on int than 
+other things.  What that will mean, I still need to design/determine.
+
+-- 22:50 --
+
+Will wrap up for now, TODO for next time:
+	-design/implement new abilities 
+	-implement new characters in the database
+	-implement character inventory and item-belts
+	-incorporate intelligence as a character stat into the game
+	-set up game menu to allow the player to choose a starting character
+	-consider game-loop design considerations:
+		-character progression (new equipment/better stats?)
+		-in-between fights character management UI
+	
