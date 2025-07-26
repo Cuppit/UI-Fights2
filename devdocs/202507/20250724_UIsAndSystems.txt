@@ -1,0 +1,115 @@
+-- 06:42 CDT --
+
+Copy-paste of TODO from yesterday:
+	-design/implement new abilities 
+	-implement new characters in the database
+	-implement character inventory and item-belts
+	-incorporate intelligence as a character stat into the game
+	-set up game menu to allow the player to choose a starting character
+	-consider game-loop design considerations:
+		-character progression (new equipment/better stats?)
+		-in-between fights character management UI
+		
+-- INCORPORATE INTELLIGENCE AS A CHARACTER STAT INTO THE GAME --
+
+But first a short blogpost: there's a ton of details I've implemented without
+documenting (mostly design decisions on how the classes manage data between
+each other), and I wish I knew what was worth documenting and what wasn't.  It's
+getting to the point where if I had to take over in the future I wouldn't know
+where to begin to fix/manage/expand.  I will try to be as intuitive as possible.
+
+back to work:
+(...also, TODO: implement .md instead of .txt as standard notes)	
+-- INCORPORATING INTELLIGENCE --
+basically already incorproated in the base_int variable adn get_int methods
+implemented yesterday.
+
+-DESIGN/IMPLEMENT NEW ABILITIES
+	Need to implement submenus beyond the default buttons in the main game UI.
+	
+--08:05 CDT--
+-- CRITICAL LESSON LEARNED --
+MenuButton has a property called "flat" which stops it from rendering as a
+button like other buttons.  Presumably this is because traditionally MenuButtons 
+are part of a menu bar.  To make it render like other buttons, be sure to turn
+this property OFF (uncheck in the inspector, or set to false in script)
+
+... 
+
+Next ability to implement: USE ITEM
+TODO
+	-Implement character inventory
+	-Implement character item belt system 
+
+HOW ITEMS WORK
+	-Every character has an inventory with an indefinite size
+	-Every character has item slots (1 by default)
+	-Equipment can add item slots
+
+...
+
+-- 17:27 CDT --
+
+Lots of feature creep and scope creep happening, time to reign it in:
+	-Finish character inventory implementation
+	-Finish character item belt system
+	ITEM DEFINITION
+		-[x]Has a class w/unique properties (can be expanded as needed) (done)
+		-[x]Has a database loaded into global containing unique instances of
+		 each item in the game(done)
+		
+		-[]Characters possess instances of items by having an "item slot"
+		 filled with the string that is the name of the item
+		-[]Characters private inventories (not in their equipped item loadout)
+		 can have multiples of items
+		 All item names are unique, and are the key values for the item database
+
+MANAGING THE ITEM BELT
+
+simple implementation: a property in the GameCharacter class that's a list
+of strings
+
+PROBLEM: HOW TO LIMIT CAPACITY? 
+ANSWER: other property, belt-capacity, as an int?
+SO WHAT ABOUT "BASE BELT CAPACITY" AS A CHARACTER STAT? WHAT EVEN DICTATES THAT?
+CHARACTER ARCHETYPE/CLASS?  
+
+Sure, Fighters get two, wizards get two, bandits get three.  Accessories can 
+expand item capacity.
+
+-- 18:47 --
+
+Over an hour of attempting to shoehorn the "accessories" concept into the game 
+revealed a multitude of design flaws in the underlying game engine, and how 
+data is managed.  Some radical changes made on the fly:
+	
+	-Instead of being individual variables, base stats are stored in a dictionary
+		-Managed to slash 15+ lines of repeated code by rolling up all stat bonuses
+		-from all equipment and all base stat bonuses into one function, insetad of
+		 needing a unique function for each stat
+	 (a further optimization will be creating an enum for stat names, to ensure 
+	  random strings cant be used to try and call stat names)
+	
+	Another problem was when databases were built.  Some class function calls
+	depended on the databases being non-empty, which used to be a problem 
+	because they were being built by the main game UI, instead of directly within
+	the "global.gd" script itself.  
+
+LESSON LEARNED
+Data management for complicated game systems is TEDIOUS if you go into it blind
+without a plan and a clear structure in mind from the start.  
+
+...
+
+--21:42--
+
+Right, so the purpose of this system tweaking was to make room to implement
+items.
+...
+
+--23:56--
+Fixed the key-value system for stats, stood up item class and database, next:
+	
+	-fill itemDB with items
+	-Write code for what happens when items are used
+	-Set up UI for selecting items

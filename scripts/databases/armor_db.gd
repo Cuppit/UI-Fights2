@@ -1,5 +1,6 @@
 extends Node
 var db = Global.armorDB
+var Stat = GameCharacter.Stat
 
 func build_armor_db():
 	db["None"]=Armor.new()

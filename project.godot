@@ -24,6 +24,7 @@ Scenes="*res://addons/ggt-core/scenes/scenes.gd"
 Utils="*res://addons/ggt-core/utils/utils.gd"
 Global="*res://scripts/global/global.gd"
 Abilities="*res://scripts/global/abilities.gd"
+ItemEffects="*res://scripts/global/item_effects.gd"
 
 [rendering]
 

@@ -2,6 +2,7 @@ extends Control
 
 var player: GameCharacter
 var opponent: GameCharacter
+var Stat = GameCharacter.Stat
 
 enum Turn {
 	PLAYER,
@@ -67,7 +68,7 @@ func update_ui():
 	$Background/VBoxContainer/HBoxContainer/PlayerUI/BtnAttack.disabled=false if current_turn==Turn.PLAYER else true
 	$Background/VBoxContainer/HBoxContainer/PlayerUI/BtnGuard.disabled=false if current_turn==Turn.PLAYER else true
 	$Background/VBoxContainer/HBoxContainer/PlayerUI/BtnItem.disabled=false if current_turn==Turn.PLAYER else true
-	$Background/VBoxContainer/HBoxContainer/PlayerUI/BtnStats.disabled=false if current_turn==Turn.PLAYER else true
+	
 	
 	## --- UPDATING OPPONENT INFORMATION ---
 	# Update opponent's name
@@ -85,19 +86,15 @@ func update_ui():
 	
 
 func _ready():
-	# Connect signals
-	# Global.connect("battle_log_updated", self, "_on_battle_log_updated")
-	
-	#generate the game resources as defined in scripts
-	print("Building game databases:")
-	Global.build_weapon_db()
-	Global.build_armor_db()
-	Global.build_character_db()
-	
-	print("building characters:")
-	player = GameCharacter.new("Devon",3,3,3)
+	print("setting up characters for upcoming fight:")
+	player = GameCharacter.new("Devon",{Stat.STR:3,Stat.DEX:3,Stat.CON:3,Stat.INT:3, Stat.BELT_CAP:3})
 	player.equipped_weapon = "Dagger"
+	player.equipped_accessory = "Side Sachel"
+	player.gain_item("Healing Balm")
 	player.print_health()
+	
+	## In case the scene was re-entered, reset current turn
+	current_turn = Turn.PLAYER
 	
 	opponent = Global.clone_character(Global.characterDB.get("Goblin", Global.characterDB["None"]))
 	
@@ -111,18 +108,29 @@ func _on_btn_attack_pressed():
 	pass # Replace with function body.
 
 func _on_btn_guard_pressed():
-	update_battle_log(str("--\n",player.character_name," is guarding!"))
 	player.process_turn("guard")
 	pass_turn()
 
-func _on_btn_item_pressed():
-	pass # Replace with function body.
 
-func _on_btn_stats_pressed():
-	pass # Replace with function body.
 
 func _on_battle_log_updated():
 		## clear log before re-filling
 	$Background/VBoxContainer/InfoBox/BattleLog.text = ""
 	for x in Global.battle_log:
 		$Background/VBoxContainer/InfoBox/BattleLog.text += (x+'\n')
+
+## Populate MenuButton with player's items on player character's item belt
+func _on_btn_item_about_to_popup():
+	$Background/VBoxContainer/HBoxContainer/PlayerUI/BtnItem.get_popup().clear()
+	var id=0
+	for item in player.item_belt:
+		$Background/VBoxContainer/HBoxContainer/PlayerUI/BtnItem.get_popup().add_item(item,id)
+		id +=1 
+	$Background/VBoxContainer/HBoxContainer/PlayerUI/BtnItem.get_popup().id_pressed.connect(_on_item_selected)
+	print('PLAYER ITEM MENU POPPING UP')
+
+func _on_item_selected(id : int) -> void:
+	var itemname = $Background/VBoxContainer/HBoxContainer/PlayerUI/BtnItem.get_popup().get_item_text(id)
+	print("USING ITEM.  ITEM SELECTED: '",itemname,"'")
+	player.process_turn("use_item", player, itemname)
+	pass_turn()

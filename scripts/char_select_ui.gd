@@ -68,10 +68,8 @@ func select_class(chosen:ChosenClass):
 func _on_btn_fighter_pressed():
 	select_class(ChosenClass.FIGHTER)
 
-
 func _on_btn_sage_pressed():
 	select_class(ChosenClass.SAGE)
-
 
 func _on_btn_bandit_pressed():
 	select_class(ChosenClass.BANDIT)

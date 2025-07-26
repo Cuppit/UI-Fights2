@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://cxoqha0u5h8h2"]
+[gd_scene load_steps=8 format=3 uid="uid://cxoqha0u5h8h2"]
 
 [ext_resource type="Script" uid="uid://cs5r1pqiettt5" path="res://scripts/main_game_ui.gd" id="1_ggdjh"]
 [ext_resource type="Script" uid="uid://t8dsksm3lrr4" path="res://scripts/game_character.gd" id="2_ncd2q"]
 [ext_resource type="Script" uid="uid://cdy4knq72wdav" path="res://scripts/weapons.gd" id="3_t66db"]
 [ext_resource type="Script" uid="uid://6ni3sunkanla" path="res://scripts/armor.gd" id="4_u4xxc"]
 [ext_resource type="Texture2D" uid="uid://c0nqrd27rten4" path="res://icon.svg" id="5_ja23f"]
+[ext_resource type="Script" uid="uid://b4npa5rgekaeg" path="res://scripts/accessories.gd" id="5_ncd2q"]
 [ext_resource type="AudioStream" uid="uid://bbxg4htrx7v3f" path="res://assets/audio/music/buildup.ogg" id="6_6pynl"]
 
 [node name="MainGameUI" type="Control"]
@@ -24,6 +25,9 @@ script = ExtResource("3_t66db")
 
 [node name="Armor" type="Node" parent="."]
 script = ExtResource("4_u4xxc")
+
+[node name="Accessories" type="Node" parent="."]
+script = ExtResource("5_ncd2q")
 
 [node name="Background" type="ColorRect" parent="."]
 layout_mode = 1
@@ -77,13 +81,11 @@ text = "Attack "
 layout_mode = 2
 text = "Guard"
 
-[node name="BtnItem" type="Button" parent="Background/VBoxContainer/HBoxContainer/PlayerUI"]
+[node name="BtnItem" type="MenuButton" parent="Background/VBoxContainer/HBoxContainer/PlayerUI"]
 layout_mode = 2
-text = "Item"
-
-[node name="BtnStats" type="Button" parent="Background/VBoxContainer/HBoxContainer/PlayerUI"]
-layout_mode = 2
-text = "Show Stats"
+text = "Use Item
+"
+flat = false
 
 [node name="OpponentUI" type="VBoxContainer" parent="Background/VBoxContainer/HBoxContainer"]
 layout_mode = 2
@@ -138,5 +140,4 @@ autoplay = true
 
 [connection signal="pressed" from="Background/VBoxContainer/HBoxContainer/PlayerUI/BtnAttack" to="." method="_on_btn_attack_pressed"]
 [connection signal="pressed" from="Background/VBoxContainer/HBoxContainer/PlayerUI/BtnGuard" to="." method="_on_btn_guard_pressed"]
-[connection signal="pressed" from="Background/VBoxContainer/HBoxContainer/PlayerUI/BtnItem" to="." method="_on_btn_item_pressed"]
-[connection signal="pressed" from="Background/VBoxContainer/HBoxContainer/PlayerUI/BtnStats" to="." method="_on_btn_stats_pressed"]
+[connection signal="about_to_popup" from="Background/VBoxContainer/HBoxContainer/PlayerUI/BtnItem" to="." method="_on_btn_item_about_to_popup"]

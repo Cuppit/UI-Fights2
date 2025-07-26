@@ -2,9 +2,12 @@
 
 extends Node
 var rng = Global.rng
+var ItemEffects = preload("res://scripts/global/item_effects.gd")
+var item_effects = ItemEffects.new()
+
 
 ## Performs the ability against the target character
-func execute_ability(user:GameCharacter, ability_name:String="", tgt:GameCharacter=null):
+func execute_ability(user:GameCharacter, ability_name:String="", tgt:GameCharacter=null, item_name:String=""):
 	Global.battle_log.append(str("--\n"))
 	match ability_name:
 		"attack":
@@ -30,5 +33,15 @@ func execute_ability(user:GameCharacter, ability_name:String="", tgt:GameCharact
 			Global.battle_log.append(str(user.character_name," is guarding!"))
 			user.guarding=true
 			print("AFTER guarding, character ",user.character_name," has ",user.get_evasion()," evasion, and ",user.get_armor()," armor.")
+		
+		"use_item":
+			if (item_name == ""):
+				print("ERROR in 'use_item' in abilities.gd: ability invoked, but no valid item name found")
+			
+			if item_name not in user.item_belt:
+				print("ERROR in 'use_item' in abilities.gd: use_item invoked, but item doesn't exist in user's item belt")
+			
+			else:
+				item_effects.use_item(user, item_name, tgt)
 		_:
-			print("MSG: Abilities.execute_ability(): No valid ability name attempted to execute?")
+			print("MSG: Abilities.execute_ability(): No script found for specified ability?")

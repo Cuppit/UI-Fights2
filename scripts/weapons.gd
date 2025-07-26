@@ -32,7 +32,7 @@ enum DamageType{
 }
 
 #var stat_bonuses={"str":0,"dex":0,"con":0}
-var stat_bonuses={"str":0,"dex":0,"con":0}
+var stat_bonuses={}
 var weapon_name = "WeaponName"
 var weapon_description = "Weapon description"
 var weapon_damage = 1
@@ -43,7 +43,11 @@ var weapon_category = WeaponCategory.SIMPLE
 var weapon_properties = [WeaponProperty.LIGHT]
 
 ## Initializer for weapons.
-func _init(wname="None", acc=1, dmg=1, dmg_type = DamageType.BLUDGEONING, desc="Nothing but your bare hands.", stat_bons={"str":0,"dex":0,"con":0}):
+func _init(wname="None", acc=1, dmg=1, dmg_type = DamageType.BLUDGEONING, desc="Nothing but your bare hands.", stat_bons={}):
+	print("CREATING WEAPON: ",wname)
 	weapon_name = wname
+	weapon_description = desc
 	weapon_damage = dmg
+	weapon_accuracy = acc
+	weapon_dmg_type = dmg_type
 	stat_bonuses=stat_bons

@@ -1,6 +1,7 @@
 extends Node
 
 var db = Global.weaponDB
+var Stat = GameCharacter.Stat
 
 func build_weapon_db():
 	db["None"]=Weapon.new()

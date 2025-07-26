@@ -1,0 +1,11 @@
+	-- 18:41 --
+	
+	Picking up where I left off:
+	
+	-fill itemDB with items
+	-Write code for what happens when items are used
+	-Set up UI for selecting items
+
+-- 20:10 --
+
+Items implemented, the UI correctly executes code for items when they're used.
