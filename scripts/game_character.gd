@@ -93,6 +93,9 @@ func gain_item(item_name:String=""):
 
 ## doesn't really do anything yet, TODO: design character progression system
 var level = 1
+var experience_points = 0
+
+var money = 0
 
 var equipped_weapon = "None"
 var equipped_armor = "None"
@@ -194,11 +197,12 @@ func process_turn(ability_name="", target=null, item=""):
 			if target.curr_health <= 0:
 				target.current_attitude = Attitude.DEFEATED
 
-func _init(chname="Anon",basic_stats={Stat.STR:1,Stat.DEX:1,Stat.CON:1,Stat.INT:1,Stat.BELT_CAP:1}, weapon="None", armor="None", attitudemsgs=null):
+func _init(chname="Anon",basic_stats={Stat.STR:1,Stat.DEX:1,Stat.CON:1,Stat.INT:1,Stat.BELT_CAP:1}, weapon="None", armor="None", accessory="None", attitudemsgs=null):
 	character_name=chname
 	base_stats=basic_stats
 	equipped_weapon = weapon
 	equipped_armor = armor
+	equipped_accessory = accessory
 	
 	if attitudemsgs != null:
 		attitude_msgs = attitudemsgs

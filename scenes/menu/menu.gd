@@ -31,7 +31,8 @@ func _on_PlayButton_pressed() -> void:
 	}
 	# Stock scene
 	#Game.change_scene_to_file("res://scenes/gameplay/gameplay.tscn", params)
-	Game.change_scene_to_file("res://scenes/main_game_ui.tscn", params)
+	#Game.change_scene_to_file("res://scenes/main_game_ui.tscn", params)
+	Game.change_scene_to_file("res://scenes/char_select_ui.tscn", params)
 
 
 func _on_ExitButton_pressed() -> void:

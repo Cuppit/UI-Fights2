@@ -1,0 +1,30 @@
+-- 07:30 CDT --
+
+		==PAX==        
+		 B   V         
+	  V    C    R      
+	I    C S S    S    
+  L    N D S M D    N  
+	Q    P M B    S    
+	   M   L   M       
+		 S   V   
+
+Goal: make different characters the player can choose
+
+Questions to answer:
+	-How does this actually become FUN?  
+		-Progression, balance, variety in options, making gameplay with depth
+		 that arises from simplicity
+		
+
+Never truly designed characters.
+
+PRIORITIES
+	-Link character select screen with maingameUI
+	-create "after-fight"
+
+...
+
+-- 09:11 --
+Character select works now.  Still need to make an "after-fight" screen, and 
+transition to the next fight.  Will come back to this later.

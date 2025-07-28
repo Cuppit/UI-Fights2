@@ -47,6 +47,7 @@ var descriptions = {ChosenClass.FIGHTER:{ \
 	'abilities':"(some description of abilities goes here)"}	
 	}
 
+
 func select_class(chosen:ChosenClass):
 	curr_chosen_class = chosen
 	
@@ -65,11 +66,34 @@ func select_class(chosen:ChosenClass):
 	$Background/VBoxContainer/HBoxContainer2/ProsCons/richTxtLblProsCons.text=descriptions[chosen]['proscons']	
 	$Background/VBoxContainer/HBoxContainer2/Abilities/RichTxtLblAbilities.text=descriptions[chosen]['abilities']
 
+	
+
 func _on_btn_fighter_pressed():
 	select_class(ChosenClass.FIGHTER)
+
 
 func _on_btn_sage_pressed():
 	select_class(ChosenClass.SAGE)
 
+
 func _on_btn_bandit_pressed():
 	select_class(ChosenClass.BANDIT)
+
+
+func _on_start_button_pressed():
+	var char_to_load
+	if curr_chosen_class == ChosenClass.FIGHTER:
+		char_to_load=Global.characterDB["Fighter"]
+	elif curr_chosen_class == ChosenClass.SAGE:
+		char_to_load=Global.characterDB["Sage"]
+	elif curr_chosen_class == ChosenClass.BANDIT:
+		char_to_load=Global.characterDB["Bandit"]
+	
+	
+	var params = {
+		"player_character": char_to_load,
+		"opponent": Global.characterDB["Goblin"]
+	}
+	Global.scene_change_params = params
+	Game.change_scene_to_file("res://scenes/main_game_ui.tscn", params)
+	

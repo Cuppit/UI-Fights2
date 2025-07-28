@@ -1,0 +1,33 @@
+-- 10:49 CDT --
+
+Players want to know details about
+their character. 
+
+HOW DOES PROGRESSION WORK?
+
+Typical rewards:
+	-Money to spend in shops
+	-XP towards gaining levels
+	-ability upgrade points
+	
+-- 12:36 --
+
+...
+
+-- 13:34 --
+
+We'll just mock up a UI for the character sheet and see what happens
+
+...
+
+-- 22:01 --
+
+Some more UI development overall accomplished today, still need to finish:
+	-post-battle rewards to player on victory (gold, xp, items, etc.)
+	-associate specific character portraits with specific characters
+	-finish "in-between-fights" UI design
+	-determine how items/inventory are managed/interact with UIs
+		-Can other items be used in battle?  Do they simply equip them?
+		-Is that a "bonus" action?
+	
+	--> TO BE CONTINUED

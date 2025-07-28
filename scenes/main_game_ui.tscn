@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cxoqha0u5h8h2"]
+[gd_scene load_steps=9 format=3 uid="uid://cxoqha0u5h8h2"]
 
 [ext_resource type="Script" uid="uid://cs5r1pqiettt5" path="res://scripts/main_game_ui.gd" id="1_ggdjh"]
 [ext_resource type="Script" uid="uid://t8dsksm3lrr4" path="res://scripts/game_character.gd" id="2_ncd2q"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://c0nqrd27rten4" path="res://icon.svg" id="5_ja23f"]
 [ext_resource type="Script" uid="uid://b4npa5rgekaeg" path="res://scripts/accessories.gd" id="5_ncd2q"]
 [ext_resource type="AudioStream" uid="uid://bbxg4htrx7v3f" path="res://assets/audio/music/buildup.ogg" id="6_6pynl"]
+[ext_resource type="Texture2D" uid="uid://dineab3xpd1" path="res://assets/sprites/wizard.png" id="6_t66db"]
 
 [node name="MainGameUI" type="Control"]
 layout_mode = 3
@@ -51,7 +52,7 @@ layout_mode = 2
 
 [node name="PlayerUI" type="VBoxContainer" parent="Background/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
+size_flags_horizontal = 2
 
 [node name="Name" type="Label" parent="Background/VBoxContainer/HBoxContainer/PlayerUI"]
 layout_mode = 2
@@ -63,6 +64,10 @@ layout_mode = 2
 text = "HP: 3/3"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Background/VBoxContainer/HBoxContainer/PlayerUI"]
+layout_mode = 2
+texture = ExtResource("6_t66db")
 
 [node name="HealthBar" type="TextureProgressBar" parent="Background/VBoxContainer/HBoxContainer/PlayerUI"]
 layout_mode = 2
@@ -86,6 +91,31 @@ layout_mode = 2
 text = "Use Item
 "
 flat = false
+
+[node name="vbEndOfBattleMsgs" type="VBoxContainer" parent="Background/VBoxContainer/HBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Background/VBoxContainer/HBoxContainer/vbEndOfBattleMsgs"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "VICTORY!
+
+You find X money on the opponent.
+
+You gain X experience points.
+
+The opponent had the following treasures:
+-1st item on enemy item belt
+-2nd item on enemy item belt"
+horizontal_alignment = 1
+
+[node name="btnEndBattle" type="Button" parent="Background/VBoxContainer/HBoxContainer/vbEndOfBattleMsgs"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+text = "END BATTLE"
 
 [node name="OpponentUI" type="VBoxContainer" parent="Background/VBoxContainer/HBoxContainer"]
 layout_mode = 2
@@ -141,3 +171,4 @@ autoplay = true
 [connection signal="pressed" from="Background/VBoxContainer/HBoxContainer/PlayerUI/BtnAttack" to="." method="_on_btn_attack_pressed"]
 [connection signal="pressed" from="Background/VBoxContainer/HBoxContainer/PlayerUI/BtnGuard" to="." method="_on_btn_guard_pressed"]
 [connection signal="about_to_popup" from="Background/VBoxContainer/HBoxContainer/PlayerUI/BtnItem" to="." method="_on_btn_item_about_to_popup"]
+[connection signal="pressed" from="Background/VBoxContainer/HBoxContainer/vbEndOfBattleMsgs/btnEndBattle" to="." method="_on_btn_end_battle_pressed"]

@@ -2,6 +2,11 @@ extends Node
 
 var rng = RandomNumberGenerator.new()
 
+## Utility dictionary used by scenes to pass parameters to new scene
+## during a scene change.
+
+var scene_change_params = {}
+
 var weaponDB = {"None":Weapon.new()}
 var armorDB = {"None":Armor.new()}
 var accessoryDB = {}
@@ -57,4 +62,5 @@ func _ready():
 	build_accessory_db()
 	build_item_db()
 	build_character_db()
+	print("in Global._ready(): character DB built.  Getting test char: ",characterDB.get("None"),", name=",characterDB.get("None").character_name)
 	

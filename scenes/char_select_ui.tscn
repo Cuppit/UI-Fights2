@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://k2pt6m2xs0cn"]
 
-[ext_resource type="Script" uid="uid://twttl518i1pn" path="res://scripts/char_select_ui.gd" id="1_x2jdb"]
-[ext_resource type="Texture2D" uid="uid://fx1pncr1qnck" path="res://assets/sprites/fighter.png" id="2_rc1oo"]
-[ext_resource type="Texture2D" uid="uid://dineab3xpd1" path="res://assets/sprites/wizard.png" id="3_8pj54"]
-[ext_resource type="Texture2D" uid="uid://cmwimbhmod7a8" path="res://assets/sprites/bandit.png" id="4_th6u8"]
+[ext_resource type="Script" uid="uid://twttl518i1pn" path="res://scripts/char_select_ui.gd" id="1_3fj12"]
+[ext_resource type="Texture2D" uid="uid://fx1pncr1qnck" path="res://assets/sprites/fighter.png" id="2_x4nrv"]
+[ext_resource type="Texture2D" uid="uid://dineab3xpd1" path="res://assets/sprites/wizard.png" id="3_f0wsf"]
+[ext_resource type="Texture2D" uid="uid://cmwimbhmod7a8" path="res://assets/sprites/bandit.png" id="4_hc7pl"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_k7a4u"]
 font_size = 64
@@ -16,7 +16,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_x2jdb")
+script = ExtResource("1_3fj12")
 
 [node name="Background" type="ColorRect" parent="."]
 layout_mode = 1
@@ -61,7 +61,7 @@ horizontal_alignment = 1
 
 [node name="BtnFighter" type="TextureButton" parent="Background/VBoxContainer/HBoxContainer/BtnPackFighter"]
 layout_mode = 2
-texture_normal = ExtResource("2_rc1oo")
+texture_normal = ExtResource("2_x4nrv")
 
 [node name="spacer" type="VBoxContainer" parent="Background/VBoxContainer/HBoxContainer"]
 modulate = Color(1, 1, 1, 0)
@@ -79,7 +79,7 @@ horizontal_alignment = 1
 
 [node name="TextureButton" type="TextureButton" parent="Background/VBoxContainer/HBoxContainer/spacer"]
 layout_mode = 2
-texture_normal = ExtResource("2_rc1oo")
+texture_normal = ExtResource("2_x4nrv")
 
 [node name="BtnPackSage" type="VBoxContainer" parent="Background/VBoxContainer/HBoxContainer"]
 modulate = Color(1, 1, 1, 0.403922)
@@ -96,7 +96,7 @@ horizontal_alignment = 1
 
 [node name="BtnSage" type="TextureButton" parent="Background/VBoxContainer/HBoxContainer/BtnPackSage"]
 layout_mode = 2
-texture_normal = ExtResource("3_8pj54")
+texture_normal = ExtResource("3_f0wsf")
 
 [node name="spacer2" type="VBoxContainer" parent="Background/VBoxContainer/HBoxContainer"]
 modulate = Color(1, 1, 1, 0)
@@ -113,7 +113,7 @@ horizontal_alignment = 1
 
 [node name="TextureButton2" type="TextureButton" parent="Background/VBoxContainer/HBoxContainer/spacer2"]
 layout_mode = 2
-texture_normal = ExtResource("3_8pj54")
+texture_normal = ExtResource("3_f0wsf")
 
 [node name="BtnPackBandit" type="VBoxContainer" parent="Background/VBoxContainer/HBoxContainer"]
 modulate = Color(1, 1, 1, 0.403922)
@@ -128,7 +128,7 @@ horizontal_alignment = 1
 
 [node name="BtnBandit" type="TextureButton" parent="Background/VBoxContainer/HBoxContainer/BtnPackBandit"]
 layout_mode = 2
-texture_normal = ExtResource("4_th6u8")
+texture_normal = ExtResource("4_hc7pl")
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="Background/VBoxContainer"]
 layout_mode = 2
@@ -166,7 +166,7 @@ horizontal_alignment = 1
 
 [node name="TextureButton" type="TextureButton" parent="Background/VBoxContainer/HBoxContainer2/spacer"]
 layout_mode = 2
-texture_normal = ExtResource("2_rc1oo")
+texture_normal = ExtResource("2_x4nrv")
 
 [node name="ProsCons" type="VBoxContainer" parent="Background/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
@@ -200,7 +200,7 @@ horizontal_alignment = 1
 
 [node name="TextureButton" type="TextureButton" parent="Background/VBoxContainer/HBoxContainer2/spacer2"]
 layout_mode = 2
-texture_normal = ExtResource("2_rc1oo")
+texture_normal = ExtResource("2_x4nrv")
 
 [node name="Abilities" type="VBoxContainer" parent="Background/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
@@ -229,3 +229,4 @@ text = "START"
 [connection signal="pressed" from="Background/VBoxContainer/HBoxContainer/BtnPackFighter/BtnFighter" to="." method="_on_btn_fighter_pressed"]
 [connection signal="pressed" from="Background/VBoxContainer/HBoxContainer/BtnPackSage/BtnSage" to="." method="_on_btn_sage_pressed"]
 [connection signal="pressed" from="Background/VBoxContainer/HBoxContainer/BtnPackBandit/BtnBandit" to="." method="_on_btn_bandit_pressed"]
+[connection signal="pressed" from="Background/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]

@@ -1,0 +1,216 @@
+[gd_scene load_steps=4 format=3 uid="uid://cqptehqam222o"]
+
+[ext_resource type="Script" uid="uid://dt1ortwka8iqs" path="res://scripts/character_management.gd" id="1_mlnjm"]
+[ext_resource type="Texture2D" uid="uid://dineab3xpd1" path="res://assets/sprites/wizard.png" id="2_64re8"]
+[ext_resource type="Texture2D" uid="uid://c0nqrd27rten4" path="res://icon.svg" id="3_e16u2"]
+
+[node name="CharacterManagement" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mlnjm")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.342894, 0.185136, 0.143227, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Background"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="lblCharMgmt" type="Label" parent="Background/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "CHARACTER MANAGEMENT"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Background/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Background/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="lblCharName" type="Label" parent="Background/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "CharacterName"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Background/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+texture = ExtResource("2_64re8")
+stretch_mode = 2
+
+[node name="lblCurrHP" type="Label" parent="Background/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "HP: 6/10"
+horizontal_alignment = 1
+
+[node name="txProgBarCurrHP" type="TextureProgressBar" parent="Background/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+value = 60.0
+texture_under = ExtResource("3_e16u2")
+texture_progress = ExtResource("3_e16u2")
+tint_under = Color(1, 0, 0, 1)
+tint_progress = Color(0, 1, 0, 1)
+
+[node name="lblEquipment" type="Label" parent="Background/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "--- EQUIPMENT ---
+"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Background/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Weapon" type="HBoxContainer" parent="Background/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="lblWeapon" type="Label" parent="Background/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer/Weapon"]
+layout_mode = 2
+text = "Weapon:"
+
+[node name="mbtnWeapon" type="MenuButton" parent="Background/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer/Weapon"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "CurrWeapon"
+flat = false
+
+[node name="Armor" type="HBoxContainer" parent="Background/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="lblArmor" type="Label" parent="Background/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer/Armor"]
+layout_mode = 2
+text = "Armor:"
+
+[node name="mbtnArmor" type="MenuButton" parent="Background/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer/Armor"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "CurrArmor"
+flat = false
+
+[node name="Accessory" type="HBoxContainer" parent="Background/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="lblAccessory" type="Label" parent="Background/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer/Accessory"]
+layout_mode = 2
+text = "Accessory: "
+
+[node name="mbtnAccessory" type="MenuButton" parent="Background/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer/Accessory"]
+layout_mode = 2
+text = "CurrAccessory"
+flat = false
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Background/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="lblCharStats" type="Label" parent="Background/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Character Stats"
+
+[node name="CharStats" type="HBoxContainer" parent="Background/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="txtStatLabels" type="RichTextLabel" parent="Background/VBoxContainer/HBoxContainer/VBoxContainer2/CharStats"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Level: 
+Money:
+XP:
+Str: 
+Dex:
+Con:
+Int:
+Acc:
+Dmg:
+Evade:
+Armor:"
+horizontal_alignment = 2
+
+[node name="txtStatValues" type="RichTextLabel" parent="Background/VBoxContainer/HBoxContainer/VBoxContainer2/CharStats"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "1
+10
+0
+3
+3
+3
+3
+6
+6
+7
+7"
+
+[node name="lblItemSlots" type="Label" parent="Background/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 2
+text = "Item Slots:"
+
+[node name="vbItemSlots" type="VBoxContainer" parent="Background/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="Background/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button3" type="Button" parent="Background/VBoxContainer/HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+text = "Rest (pay cost)"
+
+[node name="lblAbilities" type="Label" parent="Background/VBoxContainer/HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+text = "Abilities
+"
+horizontal_alignment = 1
+
+[node name="ilAbilities" type="ItemList" parent="Background/VBoxContainer/HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 4
+auto_width = true
+auto_height = true
+item_count = 2
+item_0/text = "testiitem1"
+item_1/text = "testitem2"
+
+[node name="lblAbilDesc" type="Label" parent="Background/VBoxContainer/HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+text = "--ABILITY DESCRIPTION--"
+horizontal_alignment = 1
+
+[node name="rtlItemDesc" type="RichTextLabel" parent="Background/VBoxContainer/HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Selected ability description"
+fit_content = true
+
+[node name="Button" type="Button" parent="Background/VBoxContainer/HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+text = "VIEW NEXT FIGHT
+"
+
+[node name="Button2" type="Button" parent="Background/VBoxContainer/HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+text = "START NEXT FIGHT"
