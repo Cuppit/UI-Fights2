@@ -27,6 +27,7 @@ var ItemDBScript = preload("res://scripts/databases/item_db.gd")
 var battle_log = [""]
 signal battle_log_updated(battle_log)
 
+
 # TODO 20250719: remove signal-related stuff like this 
 func update_battle_log(msg=""):
 	battle_log.append(msg)
@@ -55,7 +56,7 @@ func build_item_db():
 
 func clone_character(gchar=characterDB["None"]):
 	return GameCharacter.new(gchar.character_name,gchar.base_stats,gchar.equipped_weapon,gchar.equipped_armor,gchar.attitude_msgs)
-	
+
 func _ready():
 	build_weapon_db()
 	build_armor_db()

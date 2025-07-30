@@ -42,6 +42,8 @@ var weapon_dmg_type = DamageType.BLUDGEONING
 var weapon_category = WeaponCategory.SIMPLE
 var weapon_properties = [WeaponProperty.LIGHT]
 
+var money_value = 0
+
 ## Initializer for weapons.
 func _init(wname="None", acc=1, dmg=1, dmg_type = DamageType.BLUDGEONING, desc="Nothing but your bare hands.", stat_bons={}):
 	print("CREATING WEAPON: ",wname)

@@ -9,8 +9,9 @@ func build_character_db():
 					 ,Attitude.AGGRESSIVE:["The goblin looks ready to charge!","The goblin's shouting a battle cry!","You see a flash of bloodlust in it's eyes!"]\
 					 ,Attitude.DEFENSIVE:["It's taking a defensive posture...","The goblin's anticipating your next move!"]\
 					 ,Attitude.FAINTING:["The goblin's out of breath!","The goblin's struggling to stand!","It's looking rather weak!"]\
-					 ,Attitude.DEFEATED:["The goblin collapses into a heap on the ground!","The goblin gurgles as it falls defeated!","You eradicated that goblin!"]})
+					 ,Attitude.DEFEATED:["The goblin collapses into a heap on the ground!","The goblin gurgles as it falls defeated!","You eradicated that goblin!"]},10,10)
 	db["Goblin"].gain_item("Healing Salve")
+	db["Goblin"].money = 10
 	
 	db["Fighter"]=GameCharacter.new("Fighter",{Stat.STR:5,Stat.DEX:2,Stat.CON:4,Stat.INT:3,Stat.BELT_CAP:1},"Greatsword","Gambeson","Side Satchel", {Attitude.NEUTRAL:["The goblin stands ready.","The goblin shouts \"I'll eat your face!\"","It brandishes it's weapon menacingly.","The goblin is sizing you up."]\
 					 ,Attitude.AGGRESSIVE:["The warrior looks ready to charge!","The warrior postures aggressively!","You see a flash of bloodlust in the warrior's eyes!"]\

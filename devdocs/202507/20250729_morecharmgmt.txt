@@ -1,0 +1,48 @@
+-- 09:56 --
+
+Today just going to focus on character management ui
+until all the controls work
+
+MANAGING EQUIPMENT
+	-CURRENT IMPLEMENTATION
+		-Menu button for each piece of equipment
+	-WHAT DOES CLICKING ON THE MENU BUTTON DO?
+		-For now?:
+			-Gather list of weapons/armor/accessories currently in inventory
+			-offers popupmenu options for each of them (including "unequip")
+			-clicking on the associated one changes equipment with that item
+	
+	INVENTORY IS JUST A DICTIONARY OF STRING NAMES, HOW TO GET LIST OF 
+	WEAPONS?
+	
+	ANSWER: redefine how inventory works
+		-not just a flat dictionary, but a dictionary of dictionaries
+			-each dictionary refers to a category of item: weapon, armor, acc, item, etc.
+			
+	BIG PROBLEM: Because held weapons, armor, etc. are only identified by their string name,
+	it's difficult to know just from a string whether a name refers to an item, weapon,
+	armor, or accessory.  So, any attempt to add something to the game involves 
+	building a system to identify what type of item is, since the thing itself doesn't know
+	anything else about itself.  
+	
+	PROPOSED SOLUTION: make a global function, "get-item-type", whose sole purpose is to search
+	through every database until it finds a match for the type of the item.
+	
+	...
+	
+	MANUAL MANAGEMENT METHOD:
+		-Current "GameCharacter.gain_item()" function will also require to specify the type of item.
+		 This will put the string name in the appropriate part of inventory (weapons, item, etc.)
+		
+	
+...
+
+-- 20:53 --
+
+Too much time was spent messing with the character management UI and kludging solutions to inventory
+buttons working in a specific way.  
+
+TODO NEXT TIME:
+	-Populate items in item belt in character management UI (including empty slots)
+	-implement functionality: clicking on item in item belt lists all possible items 
+	 that could fill that slot

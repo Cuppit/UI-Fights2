@@ -30,6 +30,16 @@ enum Attitude {
 	DEFEATED ## Used to indicate 
 }
 
+
+## Used to track the inventory type of the item being gained by the player
+## (e.g. weapon, useable item, etc.)
+enum InvType {
+	ITEM,
+	WEAPON,
+	ARMOR,
+	ACCESSORY,
+}
+
 ## The current attitude of this character (neutral by default)
 var current_attitude = Attitude.NEUTRAL
 
@@ -73,29 +83,66 @@ var item_to_use = null
 
 ## Inventory: a dictionary whose keys are item names, and values are the quantity
 ## of the item in the inventory slot.
-var inventory = {}
+## The four categories of inventory are: ITEM, WEAPON, ARMOR, and ACCESSORY.
+## This is necessary beacause they're all represented as strings, so some way
+## to differentiate had to be implemented.  When redoing this project from the 
+## ground up, find a better way than just string names for db lookups.
+var inventory = {InvType.ITEM:{},InvType.WEAPON:{},InvType.ARMOR:{},InvType.ACCESSORY:{}}
 
-func gain_item(item_name:String=""):
+
+func gain_item(item_name:String="", item_type:InvType = InvType.ITEM):
 	if item_name == "":
 		print ("ERROR in GameCharacter.gain_item(",item_name,"): empty string passed")
 	else:
-		## Check if the item will fit in the character's item belt.  If not, send it
-		## to the character's inventory.
-		if len(item_belt) > get_stat(Stat.BELT_CAP):
-			if inventory.has(item_name):
-				if typeof(inventory[item_name]) == TYPE_INT:
-					inventory[item_name] += 1
+		print("IN GameCharacter.gain_item() --Trying to gain item: ",item_name)
+		match item_type:
+			InvType.ITEM:
+				print("IN GameCharacter.gain_item()--Adding item '",item_name,"' to item belt:")
+				var inv = inventory[InvType.ITEM]
+				## Check if the item will fit in the character's item belt.  If not, send it
+				## to the character's inventory.
+				if len(item_belt) > get_stat(Stat.BELT_CAP):
+					if inv.has(item_name):
+						if typeof(inv[item_name]) == TYPE_INT:
+							inv[item_name] += 1
+						else:
+							inv[item_name] = 1
 				else:
-					inventory[item_name] = 1
-		else:
-			item_belt.append(item_name)
-
+					item_belt.append(item_name)
+			_:
+				print("--GameCharacter.gain_item(",item_name,", type=",item_type,")")
+				var inv = inventory[item_type]
+				
+				if inv.has(item_name):
+					if typeof(inv[item_name]) == TYPE_INT:
+						inv[item_name] += 1
+					else:
+						print("**ERROR in GameCharacter.gain_item(",item_name,", type=",item_type,"): somehow this item name key doesn't have 'int' type for it's value")
+				else:
+					inv[item_name] = 1
+				print("--GameCharacter.gain_item(",item_name,", type=",item_type,") INVENTORY AFTER GAINING ITEM:",inv.keys())
+		
+## removes the specified item from the inventory
+func remove_item(item_name:String="", item_type:InvType = InvType.ITEM):
+		if item_name == "":
+			print ("ERROR in GameCharacter.remove_item(",item_name,"): empty string passed")
+		
+		var inv = inventory[item_type]
+		if inv.has(item_name):
+			if typeof(inv[item_name]) == TYPE_INT:
+				if inv[item_name] > 1:
+					inv[item_name] -= 1
+				else:
+					inv.erase(item_name)
+			else:
+				print ("ERROR in GameCharacter.remove_item(",item_name,"): quantity is not an integer")
 
 ## doesn't really do anything yet, TODO: design character progression system
 var level = 1
 var experience_points = 0
 
 var money = 0
+
 
 var equipped_weapon = "None"
 var equipped_armor = "None"
@@ -197,12 +244,14 @@ func process_turn(ability_name="", target=null, item=""):
 			if target.curr_health <= 0:
 				target.current_attitude = Attitude.DEFEATED
 
-func _init(chname="Anon",basic_stats={Stat.STR:1,Stat.DEX:1,Stat.CON:1,Stat.INT:1,Stat.BELT_CAP:1}, weapon="None", armor="None", accessory="None", attitudemsgs=null):
+func _init(chname="Anon",basic_stats={Stat.STR:1,Stat.DEX:1,Stat.CON:1,Stat.INT:1,Stat.BELT_CAP:1}, weapon="None", armor="None", accessory="None", attitudemsgs=null,muns=0,xp=0):
 	character_name=chname
 	base_stats=basic_stats
 	equipped_weapon = weapon
 	equipped_armor = armor
 	equipped_accessory = accessory
+	money = muns
+	experience_points = xp
 	
 	if attitudemsgs != null:
 		attitude_msgs = attitudemsgs

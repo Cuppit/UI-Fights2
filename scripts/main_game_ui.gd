@@ -64,8 +64,31 @@ func update_battle_log(msg=""):
 ## Check and update all features of the UI
 func update_ui():
 	
+	## Handling UI changes on victory of battle
+	if curr_battle_state == BattleState.PLAYER_WON:
+		
+		## Set up end-of-battle victory recap
+		var rewardsmsg = str("VICTORY!\n\n")
+		rewardsmsg += str("You gain ",opponent.experience_points," experience points!\n\n")
+		if opponent.money > 0:
+			rewardsmsg += str("You find ",opponent.money," money on the opponent.\n\n")
+		if len(opponent.item_belt) > 0:
+			rewardsmsg += str("You find the following items on the opponent:\n")
+			for item in opponent.item_belt:
+				rewardsmsg += str("-",item,"\n")
+			
+		## Give player the appropriate rewards
+		player.experience_points += opponent.experience_points
+		player.money += opponent.money
+		for item in opponent.item_belt:
+			player.gain_item(item)
+		
+		## Update text of node
+		$Background/VBoxContainer/HBoxContainer/vbEndOfBattleMsgs/rtlRewardsMsg.text=rewardsmsg			
+	
 	## -- Display or hide "End Battle" button depending on the state of the battle
 	$Background/VBoxContainer/HBoxContainer/vbEndOfBattleMsgs.visible = true if ((curr_battle_state == BattleState.PLAYER_LOST) or (curr_battle_state == BattleState.PLAYER_WON)) else false
+	
 	
 	## --- UPDATING PLAYER INFORMATION ---
 	# Update player's name

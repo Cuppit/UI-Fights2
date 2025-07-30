@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://cqptehqam222o"]
+[gd_scene load_steps=5 format=3 uid="uid://cqptehqam222o"]
 
 [ext_resource type="Script" uid="uid://dt1ortwka8iqs" path="res://scripts/character_management.gd" id="1_mlnjm"]
 [ext_resource type="Texture2D" uid="uid://dineab3xpd1" path="res://assets/sprites/wizard.png" id="2_64re8"]
 [ext_resource type="Texture2D" uid="uid://c0nqrd27rten4" path="res://icon.svg" id="3_e16u2"]
+[ext_resource type="Script" path="res://scenes/pointer_follower.gd" id="4_64re8"]
 
 [node name="CharacterManagement" type="Control"]
 layout_mode = 3
@@ -131,11 +132,11 @@ text = "Character Stats"
 
 [node name="CharStats" type="HBoxContainer" parent="Background/VBoxContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
-size_flags_vertical = 3
 
 [node name="txtStatLabels" type="RichTextLabel" parent="Background/VBoxContainer/HBoxContainer/VBoxContainer2/CharStats"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 0
 text = "Level: 
 Money:
 XP:
@@ -147,11 +148,13 @@ Acc:
 Dmg:
 Evade:
 Armor:"
+fit_content = true
 horizontal_alignment = 2
 
 [node name="txtStatValues" type="RichTextLabel" parent="Background/VBoxContainer/HBoxContainer/VBoxContainer2/CharStats"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 0
 text = "1
 10
 0
@@ -163,14 +166,16 @@ text = "1
 6
 7
 7"
+fit_content = true
 
 [node name="lblItemSlots" type="Label" parent="Background/VBoxContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
-size_flags_vertical = 2
+size_flags_vertical = 0
 text = "Item Slots:"
 
 [node name="vbItemSlots" type="VBoxContainer" parent="Background/VBoxContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
+size_flags_vertical = 2
 
 [node name="VBoxContainer3" type="VBoxContainer" parent="Background/VBoxContainer/HBoxContainer"]
 layout_mode = 2
@@ -214,3 +219,16 @@ text = "VIEW NEXT FIGHT
 [node name="Button2" type="Button" parent="Background/VBoxContainer/HBoxContainer/VBoxContainer3"]
 layout_mode = 2
 text = "START NEXT FIGHT"
+
+[node name="PointerFollower" type="CharacterBody2D" parent="."]
+script = ExtResource("4_64re8")
+
+[connection signal="about_to_popup" from="Background/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer/Weapon/mbtnWeapon" to="." method="_on_mbtn_weapon_about_to_popup"]
+[connection signal="mouse_entered" from="Background/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer/Weapon/mbtnWeapon" to="." method="_on_mbtn_weapon_mouse_entered"]
+[connection signal="mouse_exited" from="Background/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer/Weapon/mbtnWeapon" to="." method="_on_mbtn_weapon_mouse_exited"]
+[connection signal="about_to_popup" from="Background/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer/Armor/mbtnArmor" to="." method="_on_mbtn_armor_about_to_popup"]
+[connection signal="mouse_entered" from="Background/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer/Armor/mbtnArmor" to="." method="_on_mbtn_armor_mouse_entered"]
+[connection signal="mouse_exited" from="Background/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer/Armor/mbtnArmor" to="." method="_on_mbtn_armor_mouse_exited"]
+[connection signal="about_to_popup" from="Background/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer/Accessory/mbtnAccessory" to="." method="_on_mbtn_accessory_about_to_popup"]
+[connection signal="mouse_entered" from="Background/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer/Accessory/mbtnAccessory" to="." method="_on_mbtn_accessory_mouse_entered"]
+[connection signal="mouse_exited" from="Background/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer/Accessory/mbtnAccessory" to="." method="_on_mbtn_accessory_mouse_exited"]

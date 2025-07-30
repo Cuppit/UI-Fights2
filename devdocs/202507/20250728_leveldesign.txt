@@ -1,0 +1,11 @@
+-- 12:19 CDT --
+
+Copy-paste a dream/todo list from last time's notes:
+
+-post-battle rewards to player on victory (gold, xp, items, etc.)
+-associate specific character portraits with specific characters
+-finish "in-between-fights" UI design
+-determine how items/inventory are managed/interact with UIs
+	-Can other items be used in battle?  Do they simply equip them?
+	-Is that a "bonus" action?
+	
