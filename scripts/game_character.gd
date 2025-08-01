@@ -90,29 +90,42 @@ var item_to_use = null
 var inventory = {InvType.ITEM:{},InvType.WEAPON:{},InvType.ARMOR:{},InvType.ACCESSORY:{}}
 
 
-func gain_item(item_name:String="", item_type:InvType = InvType.ITEM):
+func gain_item(item_name:String="", item_type:InvType = InvType.ITEM, equip_to_belt=true):
 	if item_name == "":
 		print ("ERROR in GameCharacter.gain_item(",item_name,"): empty string passed")
 	else:
+		print("IN GameCharacter.gain_item() --current item belt contents: ",item_belt)
 		print("IN GameCharacter.gain_item() --Trying to gain item: ",item_name)
 		match item_type:
 			InvType.ITEM:
-				print("IN GameCharacter.gain_item()--Adding item '",item_name,"' to item belt:")
+				print("IN GameCharacter.gain_item()--Adding item '",item_name,"' to ,",character_name,"'s item belt:")
 				var inv = inventory[InvType.ITEM]
 				## Check if the item will fit in the character's item belt.  If not, send it
 				## to the character's inventory.
-				if len(item_belt) > get_stat(Stat.BELT_CAP):
+				if len(item_belt) >= get_stat(Stat.BELT_CAP):
+					print("IN GameCharacter.gain_item()    --ITEM BELT FULL!  Attempting to add to player inventory:")
 					if inv.has(item_name):
 						if typeof(inv[item_name]) == TYPE_INT:
 							inv[item_name] += 1
 						else:
-							inv[item_name] = 1
+							print("ERROR in GameCharacter.gain_item(): somehow an InvType.ITEM got added to\
+								the player inventory with a non-integer value for it's name key!?")
+					else:
+						inv[item_name] = 1
 				else:
-					item_belt.append(item_name)
+					if equip_to_belt:
+						item_belt.append(item_name)
+						print("IN GameCharacter.gain_item()   --ITEM ADDED! item belt status:",item_belt)
+					else:
+						if inv.has(item_name):
+							if typeof(inv[item_name]) == TYPE_INT:
+								inv[item_name] += 1
+							else:
+								print("ERROR in GameCharacter.gain_item(): somehow an somehow an InvType.ITEM got added to\
+								the player inventory with a non-integer value for it's name key!?")
 			_:
 				print("--GameCharacter.gain_item(",item_name,", type=",item_type,")")
 				var inv = inventory[item_type]
-				
 				if inv.has(item_name):
 					if typeof(inv[item_name]) == TYPE_INT:
 						inv[item_name] += 1

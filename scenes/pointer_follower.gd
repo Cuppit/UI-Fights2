@@ -29,5 +29,8 @@ func _physics_process(delta):
 		velocity = direction * delta * SPEED
 		move_and_slide()
 
+#func _init():
+	# position = get_viewport().get_mouse_position()
+
 func _ready() -> void:
 	position = get_viewport().get_mouse_position()

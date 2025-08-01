@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://dt1ortwka8iqs" path="res://scripts/character_management.gd" id="1_mlnjm"]
 [ext_resource type="Texture2D" uid="uid://dineab3xpd1" path="res://assets/sprites/wizard.png" id="2_64re8"]
 [ext_resource type="Texture2D" uid="uid://c0nqrd27rten4" path="res://icon.svg" id="3_e16u2"]
-[ext_resource type="Script" path="res://scenes/pointer_follower.gd" id="4_64re8"]
+[ext_resource type="Script" uid="uid://cpfckj5ugr3kl" path="res://scenes/pointer_follower.gd" id="4_64re8"]
 
 [node name="CharacterManagement" type="Control"]
 layout_mode = 3

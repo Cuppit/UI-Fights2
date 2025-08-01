@@ -19,6 +19,17 @@ func build_character_db():
 					 ,Attitude.FAINTING:["The warrior's out of breath!","The warrior's struggling to stand!","The warrior appears weakened!"]\
 					 ,Attitude.DEFEATED:["The warrior collapses into a heap on the ground!","The warrior falls defeated!","You defeated the warrior!"]})
 
+	for x in range(5):
+		print("IN character_db.gd, giving 'Fighter' five salves.  Adding salve #)",x,":")
+		db["Fighter"].gain_item("Useless Item") if x > 2 else null
+		db["Fighter"].gain_item("Healing Salve")
+
+	db["Fighter"].gain_item("Shortspear",GameCharacter.InvType.WEAPON)
+	db["Fighter"].gain_item("Jerkin",GameCharacter.InvType.ARMOR)
+	db["Fighter"].gain_item("Belt of Strength",GameCharacter.InvType.ACCESSORY)
+	
+	
+	
 
 	db["Sage"]=GameCharacter.new("Sage",{Stat.STR:3,Stat.DEX:3,Stat.CON:2,Stat.INT:5,Stat.BELT_CAP:1},"Greatsword","Gambeson","Side Satchel")
 	

@@ -1,0 +1,5 @@
+23:14
+
+The item implementation was more tedious than expected.  Now it's counting wrong when
+juggling between the item belt, the player inventory, and what to display on screen.
+will trouble shoot at a later time.
